@@ -12,12 +12,9 @@ def add():
     first = data.get('first')
     second = data.get('second')
     if first is None or second is None:
-        return jsonify({'error': 'Both "first" and "second" numbers are required.'}), 400
-    try:
-        result = float(first) + float(second)
-        return jsonify({'result': result}), 200
-    except ValueError:
-        return jsonify({'error': 'Invalid input. Both "first" and "second" must be numbers.'}), 400
+        return 'Bad Request', 400
+    result = first + second
+    return jsonify({'result': result}), 200
 
 @app.route('/calculator/subtract', methods=['POST'])
 def subtract():
@@ -25,15 +22,9 @@ def subtract():
     first = data.get('first')
     second = data.get('second')
     if first is None or second is None:
-        return jsonify({'error': 'Both "first" and "second" numbers are required.'}), 400
-    try:
-        result = float(first) - float(second)
-        return jsonify({'result': result}), 200
-    except ValueError:
-        return jsonify({'error': 'Invalid input. Both "first" and "second" must be numbers.'}), 400
-
-if __name__ == '__main__':
-    app.run()
+        return 'Bad Request', 400
+    result = first - second
+    return jsonify({'result': result}), 200
 
 
 if __name__ == '__main__':
